@@ -3,108 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ObraGourmet - Sistema de Gestión de Restaurante para Obras</title>
+  <title>Obra Gourmet</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Remixicon for Clean Modern Icons -->
+  <!-- Remixicon -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 <body>
 
   <div id="app">
 
-    <!-- LOGIN SCREEN -->
+    <!-- PANTALLA DE INGRESO -->
     <div id="login-view" class="login-wrapper">
       <div class="login-card">
         <div class="login-header">
           <div class="logo-large">
-            <i class="ri-restaurant-2-fill"></i>
+            <i class="ri-restaurant-fill"></i>
           </div>
-          <h2>ObraGourmet</h2>
-          <p>Gestión Inteligente de Alimentación para Obras de Construcción</p>
+          <h2>Obra Gourmet</h2>
+          <p>Sistema sencillo de restaurante</p>
         </div>
 
         <form id="login-form">
           <div class="form-group">
-            <label class="form-label" for="login-email">Correo Electrónico / Usuario</label>
-            <input type="email" id="login-email" class="form-control" placeholder="ejemplo@restaurante.com" required value="admin@restaurante.com">
+            <label class="form-label" for="login-email">Correo o Usuario</label>
+            <input type="email" id="login-email" class="form-control" placeholder="usuario@correo.com" required value="admin@restaurante.com">
           </div>
           <div class="form-group">
             <label class="form-label" for="login-password">Contraseña</label>
             <input type="password" id="login-password" class="form-control" placeholder="••••••••" required value="admin123">
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
-            <i class="ri-login-box-line"></i> Ingresar al Sistema
+          <button type="submit" class="btn btn-primary btn-block">
+            <i class="ri-login-circle-fill"></i> Entrar
           </button>
         </form>
 
-        <div class="quick-login-box">
-          <div class="quick-login-title">
-            <i class="ri-flash-line"></i> Acceso Rápido para Demostración
-          </div>
-          <div class="quick-login-buttons">
-            <button class="quick-btn" onclick="quickLogin('admin')">
-              <span><i class="ri-user-star-fill"></i> Administrador Restaurante</span>
-              <span class="role-tag">Acceso Total</span>
-            </button>
-            <button class="quick-btn" onclick="quickLogin('jefe_obra')">
-              <span><i class="ri-building-4-fill"></i> Jefe de Obra (Constructora)</span>
-              <span class="role-tag">Contrato Obra</span>
-            </button>
-            <button class="quick-btn" onclick="quickLogin('independiente')">
-              <span><i class="ri-user-line"></i> Trabajador Independiente</span>
-              <span class="role-tag">Cuenta Aparte</span>
-            </button>
-          </div>
+        <div style="margin-top: 2rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem;">
+          <p style="text-align: center; color: var(--text-muted); font-weight: 700; margin-bottom: 1rem;">Opciones de Prueba Rápida</p>
+          <button class="quick-btn" onclick="quickLogin('admin')">
+            <span><i class="ri-user-star-fill" style="color: var(--primary);"></i> Administrador</span>
+          </button>
+          <button class="quick-btn" onclick="quickLogin('jefe_obra')">
+            <span><i class="ri-building-4-fill" style="color: var(--accent-cyan);"></i> Jefe de Obra</span>
+          </button>
+          <button class="quick-btn" onclick="quickLogin('independiente')">
+            <span><i class="ri-user-fill" style="color: var(--accent-orange);"></i> Trabajador Independiente</span>
+          </button>
         </div>
       </div>
     </div>
 
 
-    <!-- MAIN APP STRUCTURE (HIDDEN UNTIL LOGIN) -->
+    <!-- APP PRINCIPAL -->
     <div id="main-app" style="display: none;">
 
-      <!-- NAVBAR -->
+      <!-- BARRA SUPERIOR -->
       <nav class="navbar">
-        <a href="#" class="brand">
+        <a href="#" class="brand" onclick="goHome()">
           <div class="brand-icon">
-            <i class="ri-restaurant-2-line"></i>
+            <i class="ri-restaurant-fill"></i>
           </div>
-          <span>Obra<span class="accent">Gourmet</span></span>
+          <span>Obra Gourmet</span>
         </a>
 
-        <!-- Admin Navigation Links -->
-        <ul id="admin-nav" class="nav-links">
-          <li class="nav-item active" onclick="switchView('dashboard')">
-            <i class="ri-dashboard-3-line"></i> Dashboard
-          </li>
-          <li class="nav-item" onclick="switchView('inventory')">
-            <i class="ri-box-3-line"></i> Inventario Insumos
-          </li>
-          <li class="nav-item" onclick="switchView('accounts')">
-            <i class="ri-building-line"></i> Cuentas de Obra
-          </li>
-          <li class="nav-item" onclick="switchView('dispatch')">
-            <i class="ri-truck-line"></i> Despacho Diario
-          </li>
-          <li class="nav-item" onclick="switchView('reports')">
-            <i class="ri-file-chart-line"></i> Reportes & Cobros
-          </li>
-          <li class="nav-item" onclick="switchView('menu')">
-            <i class="ri-goblet-line"></i> Menú & Platos
-          </li>
-        </ul>
-
-        <!-- Client Navigation Links -->
-        <ul id="client-nav" class="nav-links" style="display: none;">
-          <li class="nav-item active" onclick="switchView('client-order')">
-            <i class="ri-shopping-basket-2-line"></i> Hacer Pedido Comida
-          </li>
-          <li class="nav-item" onclick="switchView('client-balance')">
-            <i class="ri-wallet-3-line"></i> Mi Saldo & Consumos
-          </li>
-        </ul>
-
-        <!-- User Profile & Logout -->
         <div class="user-badge-container">
           <div class="user-badge">
             <div class="user-avatar" id="nav-user-initials">AD</div>
@@ -114,155 +74,82 @@
             </div>
           </div>
           <button class="btn-logout" onclick="logout()">
-            <i class="ri-logout-box-r-line"></i> Salir
+            <i class="ri-logout-box-r-fill"></i> Salir
           </button>
         </div>
       </nav>
 
-      <!-- MAIN CONTAINER FOR VIEWS -->
       <main class="main-content">
 
-        <!-- PROBLEM CONTEXT BANNER -->
-        <div class="problem-context-banner">
-          <div class="context-icon">
-            <i class="ri-shield-check-line"></i>
-          </div>
-          <div class="context-info">
-            <h4>Sistema Operativo de Control Automatizado</h4>
-            <p>Se ha digitalizado la gestión manual del restaurante: Eliminación de errores en faltantes de inventario, registro automatizado de servicios diario (Lunes a Sábado), desgloses de comidas con "extras" y cierres de liquidación quincenal/mensual por Efectivo o Transferencia.</p>
-          </div>
-        </div>
-
         <!-- ========================================== -->
-        <!-- VIEW 1: ADMIN DASHBOARD -->
+        <!-- VISTA: MENÚ PRINCIPAL (HOME) -->
         <!-- ========================================== -->
-        <section id="view-dashboard" class="view-section active">
+        <section id="view-home" class="view-section active">
           <div class="page-header">
             <div class="page-title-group">
-              <h1>Panel de Control General</h1>
-              <p>Resumen financiero, control de entregas de alimentos y estado de insumos.</p>
-            </div>
-            <div style="display: flex; gap: 0.75rem;">
-              <button class="btn btn-primary" onclick="switchView('dispatch')">
-                <i class="ri-add-circle-line"></i> Registrar Despacho
-              </button>
-              <button class="btn btn-secondary" onclick="switchView('reports')">
-                <i class="ri-file-download-line"></i> Generar Reporte Mes
-              </button>
+              <h1>Inicio</h1>
+              <p>¿Qué deseas hacer hoy?</p>
             </div>
           </div>
 
-          <!-- METRICS GRID -->
-          <div class="metrics-grid">
-            <div class="glass-card metric-card" style="--card-accent: var(--primary);">
-              <div class="metric-header">
-                <span class="metric-title">Comidas Entregadas (Mes)</span>
-                <div class="metric-icon"><i class="ri-restaurant-line"></i></div>
-              </div>
-              <div class="metric-value" id="kpi-meals-count">0</div>
-              <div class="metric-sub">
-                <span class="highlight-good"><i class="ri-calendar-event-line"></i> Lun a Sáb</span> (Exento domingos)
-              </div>
-            </div>
-
-            <div class="glass-card metric-card" style="--card-accent: var(--accent-red);">
-              <div class="metric-header">
-                <span class="metric-title">Pendiente por Cobrar</span>
-                <div class="metric-icon"><i class="ri-money-dollar-circle-line"></i></div>
-              </div>
-              <div class="metric-value" id="kpi-owed-amount">$0</div>
-              <div class="metric-sub">
-                <span class="highlight-bad" id="kpi-owed-clients">0 empresas / personas</span> debiendo
-              </div>
-            </div>
-
-            <div class="glass-card metric-card" style="--card-accent: var(--accent-green);">
-              <div class="metric-header">
-                <span class="metric-title">Total Cobrado (Mes)</span>
-                <div class="metric-icon"><i class="ri-bank-card-line"></i></div>
-              </div>
-              <div class="metric-value" id="kpi-paid-amount">$0</div>
-              <div class="metric-sub" id="kpi-paid-split">
-                Efectivo: $0 | Transferencia: $0
-              </div>
-            </div>
-
-            <div class="glass-card metric-card" style="--card-accent: var(--accent-cyan);">
-              <div class="metric-header">
-                <span class="metric-title">Insumos con Stock Bajo</span>
-                <div class="metric-icon"><i class="ri-alert-line"></i></div>
-              </div>
-              <div class="metric-value" id="kpi-low-stock-count">0</div>
-              <div class="metric-sub">
-                <span class="highlight-bad" id="kpi-critical-stock">0 críticos</span> requiriendo compra
-              </div>
-            </div>
+          <!-- Opciones para Administrador -->
+          <div class="home-menu-grid" id="admin-home-menu" style="display: none;">
+            <a onclick="switchView('dispatch')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: var(--accent-orange); background: #FFEDD5;"><i class="ri-truck-fill"></i></div>
+              <h3>Entregar Comidas</h3>
+            </a>
+            <a onclick="switchView('inventory')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: var(--accent-cyan); background: #E0F2FE;"><i class="ri-box-3-fill"></i></div>
+              <h3>Ver Bodega</h3>
+            </a>
+            <a onclick="switchView('accounts')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: var(--primary); background: var(--primary-light);"><i class="ri-money-dollar-circle-fill"></i></div>
+              <h3>Cobrar Deudas</h3>
+            </a>
+            <a onclick="switchView('reports')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: var(--text-muted); background: var(--bg-input);"><i class="ri-file-list-3-fill"></i></div>
+              <h3>Hacer Reporte</h3>
+            </a>
+            <a onclick="switchView('menu')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: #7C3AED; background: #EDE9FE;"><i class="ri-restaurant-menu-fill"></i></div>
+              <h3>Editar Menú</h3>
+            </a>
           </div>
 
-          <!-- DASHBOARD LOWER SECTION: TABLES & QUICK OVERVIEW -->
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; flex-wrap: wrap;">
-            
-            <!-- Recent Deliveries & Orders -->
-            <div class="glass-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h3><i class="ri-time-line" style="color: var(--primary);"></i> Últimos Despachos a Obra</h3>
-                <button class="btn btn-secondary btn-sm" onclick="switchView('dispatch')">Ver Todos</button>
-              </div>
-              <div class="table-responsive">
-                <table class="custom-table">
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Cliente / Obra</th>
-                      <th>Servicio</th>
-                      <th>Raciones</th>
-                      <th>Extras</th>
-                      <th>Monto Total</th>
-                    </tr>
-                  </thead>
-                  <tbody id="dashboard-recent-deliveries">
-                    <!-- Populated dynamically -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Critical Stock Alerts -->
-            <div class="glass-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-                <h3><i class="ri-box-3-fill" style="color: var(--accent-red);"></i> Insumos Escasos</h3>
-                <button class="btn btn-secondary btn-sm" onclick="switchView('inventory')">Ir a Inventario</button>
-              </div>
-              <div id="dashboard-stock-alerts" style="display: flex; flex-direction: column; gap: 0.8rem;">
-                <!-- Populated dynamically -->
-              </div>
-            </div>
-
+          <!-- Opciones para Cliente (Jefe de obra / Trabajador) -->
+          <div class="home-menu-grid" id="client-home-menu" style="display: none;">
+            <a onclick="switchView('client-order')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: var(--primary); background: var(--primary-light);"><i class="ri-shopping-basket-2-fill"></i></div>
+              <h3>Pedir Comida</h3>
+            </a>
+            <a onclick="switchView('client-balance')" class="home-menu-card">
+              <div class="home-menu-icon" style="color: var(--accent-cyan); background: #E0F2FE;"><i class="ri-wallet-3-fill"></i></div>
+              <h3>Ver mi Deuda</h3>
+            </a>
           </div>
         </section>
 
 
         <!-- ========================================== -->
-        <!-- VIEW 2: INVENTORY MANAGEMENT -->
+        <!-- VISTA: BODEGA (INVENTARIO) -->
         <!-- ========================================== -->
         <section id="view-inventory" class="view-section">
           <div class="page-header">
-            <div class="page-title-group">
-              <h1>Inventario de Alimentos e Insumos</h1>
-              <p>Control exacto de ingredientes, carnes, granos, bebidas y envases térmicos.</p>
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
+            <div class="page-title-group" style="flex: 1;">
+              <h1>Bodega</h1>
             </div>
             <button class="btn btn-primary" onclick="openNewInsumoModal()">
-              <i class="ri-add-line"></i> Agregar Nuevo Insumo
+              <i class="ri-add-circle-fill"></i> Nuevo Insumo
             </button>
           </div>
 
-          <!-- Filter Bar -->
           <div class="filter-tabs" id="inventory-category-tabs">
-            <button class="filter-tab-btn active" onclick="filterInventory('all')">Todos los Insumos</button>
-            <button class="filter-tab-btn" onclick="filterInventory('Granos y Harinas')">Granos & Harinas</button>
-            <button class="filter-tab-btn" onclick="filterInventory('Proteínas')">Carnes & Proteínas</button>
-            <button class="filter-tab-btn" onclick="filterInventory('Bebidas')">Bebidas & Extras</button>
-            <button class="filter-tab-btn" onclick="filterInventory('Desechables')">Empaques Obra</button>
+            <button class="filter-tab-btn active" onclick="filterInventory('all')">Todos</button>
+            <button class="filter-tab-btn" onclick="filterInventory('Granos y Harinas')">Granos</button>
+            <button class="filter-tab-btn" onclick="filterInventory('Proteínas')">Carnes</button>
+            <button class="filter-tab-btn" onclick="filterInventory('Bebidas')">Bebidas</button>
+            <button class="filter-tab-btn" onclick="filterInventory('Desechables')">Empaques</button>
           </div>
 
           <div class="glass-card">
@@ -270,13 +157,11 @@
               <table class="custom-table">
                 <thead>
                   <tr>
-                    <th>Código</th>
-                    <th>Insumo</th>
+                    <th>Nombre</th>
                     <th>Categoría</th>
-                    <th>Stock Actual</th>
-                    <th>Stock Mínimo</th>
-                    <th>Unidad</th>
-                    <th>Estado Stock</th>
+                    <th>Cantidad Actual</th>
+                    <th>Alerta Mínima</th>
+                    <th>Estado</th>
                     <th>Acción</th>
                   </tr>
                 </thead>
@@ -290,22 +175,22 @@
 
 
         <!-- ========================================== -->
-        <!-- VIEW 3: CONTRACTS & ACCOUNTS -->
+        <!-- VISTA: COBRAR DEUDAS -->
         <!-- ========================================== -->
         <section id="view-accounts" class="view-section">
           <div class="page-header">
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
             <div class="page-title-group">
-              <h1>Cuentas de Obra y Clientes</h1>
-              <p>Gestión de deudas por contratos de empresas de construcción y cuentas de trabajadores independientes.</p>
+              <h1>Cobrar Deudas</h1>
             </div>
           </div>
 
           <div class="filter-tabs">
             <button class="filter-tab-btn active" id="tab-btn-empresas" onclick="filterAccountsTab('empresa')">
-              <i class="ri-building-4-line"></i> Contratos Empresas / Jefes de Obra
+              Obras y Constructoras
             </button>
             <button class="filter-tab-btn" id="tab-btn-independientes" onclick="filterAccountsTab('independiente')">
-              <i class="ri-user-line"></i> Trabajadores Independientes (Cuenta Aparte)
+              Trabajadores
             </button>
           </div>
 
@@ -314,13 +199,11 @@
               <table class="custom-table">
                 <thead>
                   <tr>
-                    <th>Cliente / Empresa</th>
-                    <th>Representante / Obra</th>
-                    <th>Comidas Ocupadas (Lun-Sáb)</th>
-                    <th>Items Extras</th>
-                    <th>Saldo Acumulado</th>
-                    <th>Estado Pago</th>
-                    <th>Acciones</th>
+                    <th>Cliente</th>
+                    <th>Comidas Totales</th>
+                    <th>Total a Pagar</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
                   </tr>
                 </thead>
                 <tbody id="accounts-table-body">
@@ -333,180 +216,117 @@
 
 
         <!-- ========================================== -->
-        <!-- VIEW 4: DAILY DISPATCH -->
+        <!-- VISTA: ENTREGAR COMIDAS -->
         <!-- ========================================== -->
         <section id="view-dispatch" class="view-section">
           <div class="page-header">
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
             <div class="page-title-group">
-              <h1>Registro de Despacho Diario de Comidas</h1>
-              <p>Control de entregas diarias (Desayuno, Almuerzo, Cena) a las obras y cobro de extras.</p>
+              <h1>Entregar Comidas</h1>
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
-            
-            <!-- Dispatch Form -->
-            <div class="glass-card">
-              <h3 style="margin-bottom: 1.25rem;"><i class="ri-truck-line" style="color: var(--primary);"></i> Nuevo Despacho</h3>
-              <form id="dispatch-form">
-                <div class="form-group">
-                  <label class="form-label">Fecha del Servico</label>
-                  <input type="date" id="dispatch-date" class="form-control" required>
-                  <small style="color: var(--accent-cyan); font-size: 0.78rem; display: block; margin-top: 0.25rem;">
-                    * Recordatorio: Servicio activo de Lunes a Sábado
-                  </small>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label">Cliente u Obra Destinataria</label>
-                  <select id="dispatch-client" class="form-select" required>
-                    <!-- Dynamic Options -->
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label">Tipo de Servicio</label>
-                  <select id="dispatch-meal-type" class="form-select" required>
-                    <option value="Desayuno">Desayuno de Obra ($10,000)</option>
-                    <option value="Almuerzo" selected>Almuerzo Ejecutivo de Obra ($14,000)</option>
-                    <option value="Cena">Cena para Turno ($12,000)</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label">Cantidad de Raciones / Comidas</label>
-                  <input type="number" id="dispatch-qty" class="form-control" min="1" value="10" required>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label">Adicionar Producto Extra (Opcional)</label>
-                  <div style="display: flex; gap: 0.5rem;">
-                    <select id="dispatch-extra-item" class="form-select">
-                      <option value="">-- Sin Extra --</option>
-                      <option value="Gaseosa 1.5L">Gaseosa 1.5L ($6,000)</option>
-                      <option value="Jugos Naturales">Jugo Natural ($3,500)</option>
-                      <option value="Postre Casero">Postre Casero ($4,000)</option>
-                      <option value="Porción Carne Extra">Porción Carne Extra ($5,000)</option>
-                    </select>
-                    <input type="number" id="dispatch-extra-qty" class="form-control" style="width: 90px;" min="0" value="0" placeholder="Cant">
-                  </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                  <i class="ri-check-double-line"></i> Guardar y Despachar
-                </button>
-              </form>
-            </div>
-
-            <!-- Dispatch History Table -->
-            <div class="glass-card">
-              <h3 style="margin-bottom: 1.25rem;"><i class="ri-history-line" style="color: var(--primary);"></i> Historial de Despachos Recientes</h3>
-              <div class="table-responsive">
-                <table class="custom-table">
-                  <thead>
-                    <tr>
-                      <th>Fecha / Hora</th>
-                      <th>Obra / Cliente</th>
-                      <th>Servicio</th>
-                      <th>Cant.</th>
-                      <th>Extras</th>
-                      <th>Total ($)</th>
-                    </tr>
-                  </thead>
-                  <tbody id="dispatch-log-table">
-                    <!-- Dynamic Rows -->
-                  </tbody>
-                </table>
+          <div class="glass-card" style="max-width: 700px; margin: 0 auto;">
+            <h3 style="margin-bottom: 1.5rem;"><i class="ri-truck-fill" style="color: var(--primary);"></i> Nueva Entrega</h3>
+            <form id="dispatch-form">
+              <div class="form-group">
+                <label class="form-label">Fecha de Entrega</label>
+                <input type="date" id="dispatch-date" class="form-control" required>
               </div>
-            </div>
 
+              <div class="form-group">
+                <label class="form-label">¿A quién se le entrega?</label>
+                <select id="dispatch-client" class="form-select" required>
+                  <!-- Dynamic Options -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">¿Qué comida es?</label>
+                <select id="dispatch-meal-type" class="form-select" required>
+                  <option value="Desayuno">Desayuno ($10.000)</option>
+                  <option value="Almuerzo" selected>Almuerzo ($14.000)</option>
+                  <option value="Cena">Cena ($12.000)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">¿Cuántos platos?</label>
+                <input type="number" id="dispatch-qty" class="form-control" min="1" value="1" required>
+              </div>
+
+              <div class="form-group" style="background: var(--bg-input); padding: 1.5rem; border-radius: 12px;">
+                <label class="form-label">¿Lleva algún Extra?</label>
+                <select id="dispatch-extra-item" class="form-select" style="margin-bottom: 1rem;">
+                  <option value="">Ninguno</option>
+                  <option value="Gaseosa 1.5L">Gaseosa 1.5L ($6.000)</option>
+                  <option value="Jugos Naturales">Jugo Natural ($3.500)</option>
+                  <option value="Postre Casero">Postre Casero ($4.000)</option>
+                  <option value="Porción Carne Extra">Porción Carne Extra ($5.000)</option>
+                </select>
+                <label class="form-label">Cantidad del Extra</label>
+                <input type="number" id="dispatch-extra-qty" class="form-control" min="0" value="0">
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" style="margin-top: 2rem;">
+                <i class="ri-check-double-line"></i> Guardar Entrega
+              </button>
+            </form>
           </div>
         </section>
 
 
         <!-- ========================================== -->
-        <!-- VIEW 5: REPORTS & BILLING CLOSURES -->
+        <!-- VISTA: REPORTES -->
         <!-- ========================================== -->
         <section id="view-reports" class="view-section">
           <div class="page-header">
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
             <div class="page-title-group">
-              <h1>Reporte de Cierre Quincenal y Mensual</h1>
-              <p>Generación de cuentas claras: Comidas servidas, pagadas, extras y método de cobro.</p>
+              <h1>Hacer Reporte</h1>
             </div>
+            <button class="btn btn-primary" onclick="window.print()">
+              <i class="ri-printer-fill"></i> Imprimir / Guardar PDF
+            </button>
           </div>
 
-          <!-- Report Filter Box -->
           <div class="glass-card" style="margin-bottom: 2rem;">
-            <div style="display: flex; gap: 1.5rem; align-items: flex-end; flex-wrap: wrap;">
-              <div style="flex: 1; min-width: 200px;">
-                <label class="form-label">Filtrar por Obra / Cliente</label>
-                <select id="report-filter-client" class="form-select" onchange="generateReport()">
-                  <option value="all">-- Todos los Clientes --</option>
-                  <!-- Populated dynamically -->
-                </select>
-              </div>
-              <div style="flex: 1; min-width: 180px;">
-                <label class="form-label">Período de Liquidación</label>
-                <select id="report-filter-period" class="form-select" onchange="generateReport()">
-                  <option value="current">Quincena Actual en Curso</option>
-                  <option value="previous">Quincena / Mes Anterior</option>
-                  <option value="all">Histórico General</option>
-                </select>
-              </div>
-              <button class="btn btn-primary" onclick="window.print()">
-                <i class="ri-printer-line"></i> Imprimir Reporte / PDF
-              </button>
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label">Ver cliente específico:</label>
+              <select id="report-filter-client" class="form-select" onchange="generateReport()">
+                <option value="all">Todos</option>
+              </select>
             </div>
           </div>
 
-          <!-- Report Display Content -->
           <div class="glass-card" id="printable-report">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--border-color); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
-              <div>
-                <h2><i class="ri-restaurant-fill" style="color: var(--primary);"></i> Restaurante ObraGourmet</h2>
-                <p style="color: var(--text-muted);">NIT: 901.482.394-1 | Tel: 300 987 6543</p>
-                <p style="color: var(--text-muted);">Especialistas en Alimentación de Obras de Construcción</p>
+            <div style="text-align: center; margin-bottom: 2rem;">
+              <h2><i class="ri-restaurant-fill" style="color: var(--primary);"></i> Restaurante Obra Gourmet</h2>
+              <p style="color: var(--text-muted); font-size: 1.1rem;">Reporte de Cuentas</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+              <div class="summary-box" style="border-color: var(--accent-red);">
+                <span style="color: var(--text-muted); font-weight: 700;">Deuda Total por Cobrar</span>
+                <div style="font-size: 2rem; font-weight: 900; color: var(--accent-red);" id="rep-summary-total-owed">$0</div>
               </div>
-              <div style="text-align: right;">
-                <span class="badge badge-info" style="font-size: 0.9rem;" id="report-period-badge">Reporte Quincenal</span>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;" id="report-generated-date">Fecha: 12/08/2026</p>
+              <div class="summary-box" style="border-color: var(--accent-green);">
+                <span style="color: var(--text-muted); font-weight: 700;">Dinero Recibido (Pagado)</span>
+                <div style="font-size: 2rem; font-weight: 900; color: var(--accent-green);" id="rep-summary-total-paid">$0</div>
               </div>
             </div>
 
-            <!-- Report Summary Cards -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-              <div class="summary-box">
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Comidas Totales Debidas</span>
-                <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-red);" id="rep-summary-meals-owed">0 raciones</div>
-              </div>
-              <div class="summary-box">
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Consumo en Extras</span>
-                <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-cyan);" id="rep-summary-extras">$0</div>
-              </div>
-              <div class="summary-box">
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Saldo Pendiente de Cobro</span>
-                <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="rep-summary-total-owed">$0</div>
-              </div>
-              <div class="summary-box">
-                <span style="font-size: 0.8rem; color: var(--text-muted);">Recaudado (Pagado)</span>
-                <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent-green);" id="rep-summary-total-paid">$0</div>
-              </div>
-            </div>
-
-            <!-- Detailed Breakdown Table -->
-            <h3 style="margin-bottom: 1rem;"><i class="ri-list-check" style="color: var(--primary);"></i> Desglose por Cliente / Contrato</h3>
+            <h3 style="margin-bottom: 1.5rem;"><i class="ri-list-check" style="color: var(--primary);"></i> Detalle por Cliente</h3>
             <div class="table-responsive">
               <table class="custom-table">
                 <thead>
                   <tr>
-                    <th>Cliente / Obra</th>
-                    <th>Tipo Cuenta</th>
+                    <th>Cliente</th>
                     <th>Desayunos</th>
                     <th>Almuerzos</th>
                     <th>Cenas</th>
-                    <th>Valor Extras</th>
                     <th>Total Acumulado</th>
-                    <th>Estado / Pago</th>
+                    <th>Estado</th>
                   </tr>
                 </thead>
                 <tbody id="report-details-body">
@@ -520,16 +340,16 @@
 
 
         <!-- ========================================== -->
-        <!-- VIEW 6: MENU & DISH CONFIG (ADMIN) -->
+        <!-- VISTA: MENÚ (EDITAR PLATOS) -->
         <!-- ========================================== -->
         <section id="view-menu" class="view-section">
           <div class="page-header">
-            <div class="page-title-group">
-              <h1>Configuración de Menú y Platos</h1>
-              <p>Administre la oferta gastronómica y precios para las obras de construcción.</p>
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
+            <div class="page-title-group" style="flex: 1;">
+              <h1>Editar Menú</h1>
             </div>
             <button class="btn btn-primary" onclick="openNewDishModal()">
-              <i class="ri-add-line"></i> Crear Nuevo Plato
+              <i class="ri-add-circle-fill"></i> Crear Nuevo Plato
             </button>
           </div>
 
@@ -540,247 +360,194 @@
 
 
         <!-- ========================================== -->
-        <!-- VIEW 7: CLIENT MEAL ORDERING -->
+        <!-- VISTA: CLIENTE (PEDIR COMIDA) -->
         <!-- ========================================== -->
         <section id="view-client-order" class="view-section">
           <div class="page-header">
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
             <div class="page-title-group">
-              <h1>Hacer Pedido de Comida para Obra</h1>
-              <p>Seleccione sus desayunos, almuerzos, cenas y adicioné extras.</p>
+              <h1>Pedir Comida</h1>
             </div>
           </div>
 
-          <!-- Day Selection Notice -->
-          <div class="glass-card" style="margin-bottom: 1.5rem; border-left: 4px solid var(--primary);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-              <div>
-                <h4 style="color: var(--primary);"><i class="ri-calendar-check-line"></i> Programación de Pedido</h4>
-                <p style="font-size: 0.88rem; color: var(--text-muted);">Servicio de despacho activo de Lunes a Sábado a la zona de trabajo.</p>
-              </div>
-              <div style="display: flex; gap: 0.5rem; align-items: center;">
-                <label class="form-label" style="margin: 0;">Fecha Deseada:</label>
-                <input type="date" id="client-order-date" class="form-control" style="width: 170px;">
-              </div>
+          <div class="glass-card" style="margin-bottom: 2rem; background: var(--bg-input);">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" style="font-size: 1.2rem;"><i class="ri-calendar-event-fill" style="color: var(--primary);"></i> ¿Para cuándo es el pedido?</label>
+              <input type="date" id="client-order-date" class="form-control" style="max-width: 300px;">
             </div>
           </div>
 
-          <!-- Dishes Menu Cards -->
-          <h3 style="margin-bottom: 1rem;"><i class="ri-restaurant-2-line" style="color: var(--primary);"></i> Menú Disponible</h3>
           <div class="menu-grid" id="client-dishes-grid">
             <!-- Dynamic dishes list -->
           </div>
 
-          <!-- Order Summary Floating Box -->
-          <div class="glass-card" style="margin-top: 2rem;">
-            <h3><i class="ri-shopping-cart-2-line" style="color: var(--primary);"></i> Resumen de tu Pedido</h3>
-            <div id="client-order-items-list" style="margin: 1rem 0;">
+          <!-- Carrito Flotante -->
+          <div class="glass-card" style="margin-top: 3rem; border: 3px solid var(--primary);">
+            <h3 style="font-size: 1.6rem; margin-bottom: 1.5rem;"><i class="ri-shopping-cart-2-fill" style="color: var(--primary);"></i> Resumen de tu Pedido</h3>
+            <div id="client-order-items-list">
               <!-- Populated via JS -->
             </div>
             
-            <div class="summary-box" style="margin-top: 1rem;">
+            <div class="summary-box" style="margin-top: 1.5rem; background: #FFFFFF;">
               <div class="summary-row total">
-                <span>Total a Cargar:</span>
+                <span>Total a Pagar:</span>
                 <span id="client-order-total-price">$0</span>
               </div>
             </div>
 
-            <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
-              <button class="btn btn-success" onclick="submitClientOrder()">
-                <i class="ri-send-plane-fill"></i> Confirmar y Registrar Pedido
-              </button>
-            </div>
+            <button class="btn btn-primary btn-block" style="margin-top: 2rem; font-size: 1.3rem; min-height: 60px;" onclick="submitClientOrder()">
+              <i class="ri-send-plane-fill"></i> Confirmar y Enviar Pedido
+            </button>
           </div>
         </section>
 
 
         <!-- ========================================== -->
-        <!-- VIEW 8: CLIENT BALANCE & ACCOUNT -->
+        <!-- VISTA: CLIENTE (VER DEUDA) -->
         <!-- ========================================== -->
         <section id="view-client-balance" class="view-section">
           <div class="page-header">
+            <button class="btn-back" onclick="goHome()"><i class="ri-arrow-left-line"></i> Volver</button>
             <div class="page-title-group">
-              <h1>Mi Estado de Cuenta y Consumos</h1>
-              <p>Consulte las comidas servidas a su obra o cuenta independiente en la quincena actual.</p>
+              <h1>Mi Deuda</h1>
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem;">
-            
-            <!-- Balance Card -->
-            <div class="glass-card">
-              <h3 style="margin-bottom: 1rem;"><i class="ri-wallet-3-line" style="color: var(--primary);"></i> Balance de Quincena</h3>
-              <div style="text-align: center; padding: 1.5rem 0;">
-                <span style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">Saldo Actual por Pagar</span>
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-red); margin: 0.5rem 0;" id="client-current-balance">$0</div>
-                <span class="badge badge-warning" id="client-balance-status">Pago Quincenal Pendiente</span>
-              </div>
+          <div class="glass-card" style="text-align: center; padding: 3rem 2rem;">
+            <h3 style="color: var(--text-muted); margin-bottom: 1rem;">Total a Pagar</h3>
+            <div style="font-size: 4rem; font-weight: 900; color: var(--accent-red); line-height: 1;" id="client-current-balance">$0</div>
+            <div style="margin-top: 1rem;">
+              <span class="badge badge-warning" id="client-balance-status" style="font-size: 1.2rem;">Pago Pendiente</span>
+            </div>
 
-              <div class="summary-box" style="margin-top: 1rem;">
-                <div class="summary-row">
-                  <span>Comidas Ordinarias:</span>
-                  <strong id="client-stat-meals">0 raciones</strong>
-                </div>
-                <div class="summary-row">
-                  <span>Extras Consumidos:</span>
-                  <strong id="client-stat-extras">$0</strong>
-                </div>
-                <div class="summary-row">
-                  <span>Modalidad de Cobro:</span>
-                  <strong id="client-account-type-label">Contrato Obra</strong>
-                </div>
-              </div>
-
-              <button class="btn btn-primary" style="width: 100%; margin-top: 1.25rem;" onclick="openPaymentModalForCurrentClient()">
-                <i class="ri-bank-card-line"></i> Reportar / Registrar Pago
+            <div style="margin-top: 3rem;">
+              <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 1rem;">Comidas Pedidas: <strong id="client-stat-meals" style="color: var(--text-main);">0 platos</strong></p>
+              <button class="btn btn-primary btn-block" style="min-height: 60px; font-size: 1.2rem;" onclick="openPaymentModalForCurrentClient()">
+                <i class="ri-check-double-fill"></i> Registrar que ya pagué
               </button>
             </div>
-
-            <!-- History of Meals Received -->
-            <div class="glass-card">
-              <h3 style="margin-bottom: 1rem;"><i class="ri-history-line" style="color: var(--primary);"></i> Desglose de Comidas Recibidas</h3>
-              <div class="table-responsive">
-                <table class="custom-table">
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Servicio</th>
-                      <th>Cant.</th>
-                      <th>Extras</th>
-                      <th>Monto</th>
-                    </tr>
-                  </thead>
-                  <tbody id="client-history-table">
-                    <!-- Dynamic -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
           </div>
+
         </section>
 
       </main>
     </div>
 
-    <!-- MODAL: ADJUST STOCK -->
+    <!-- MODALES -->
+
+    <!-- MODAL: ACTUALIZAR STOCK -->
     <div class="modal-overlay" id="stock-modal">
       <div class="modal-container">
         <div class="modal-header">
-          <h3><i class="ri-edit-line" style="color: var(--primary);"></i> Actualizar Stock de Insumo</h3>
+          <h3>Actualizar Cantidad</h3>
           <button class="modal-close" onclick="closeModal('stock-modal')">&times;</button>
         </div>
         <form id="stock-form">
           <input type="hidden" id="stock-insumo-id">
           <div class="form-group">
-            <label class="form-label">Nombre del Insumo</label>
-            <input type="text" id="stock-insumo-name" class="form-control" readonly>
+            <label class="form-label">Insumo</label>
+            <input type="text" id="stock-insumo-name" class="form-control" readonly style="background: var(--bg-input);">
           </div>
           <div class="form-group">
-            <label class="form-label">Nuevo Stock Actual</label>
+            <label class="form-label">Nueva Cantidad Total</label>
             <input type="number" id="stock-insumo-qty" class="form-control" min="0" required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeModal('stock-modal')">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar Cambio</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- MODAL: REGISTER PAYMENT / CLOSURE -->
+    <!-- MODAL: REGISTRAR PAGO -->
     <div class="modal-overlay" id="payment-modal">
       <div class="modal-container">
         <div class="modal-header">
-          <h3><i class="ri-check-double-line" style="color: var(--accent-green);"></i> Liquidar y Registrar Pago</h3>
+          <h3>Cobrar o Recibir Pago</h3>
           <button class="modal-close" onclick="closeModal('payment-modal')">&times;</button>
         </div>
         <form id="payment-form">
           <input type="hidden" id="pay-client-id">
           <div class="form-group">
-            <label class="form-label">Cliente / Obra</label>
-            <input type="text" id="pay-client-name" class="form-control" readonly>
+            <label class="form-label">Cliente</label>
+            <input type="text" id="pay-client-name" class="form-control" readonly style="background: var(--bg-input);">
           </div>
           <div class="form-group">
-            <label class="form-label">Monto Total Pendiente</label>
-            <input type="text" id="pay-total-amount" class="form-control" style="font-weight: 800; color: var(--accent-red);" readonly>
+            <label class="form-label">Valor que Paga</label>
+            <input type="text" id="pay-total-amount" class="form-control" style="font-weight: 900; color: var(--accent-red);" readonly>
           </div>
           <div class="form-group">
-            <label class="form-label">Método de Pago Recibido</label>
+            <label class="form-label">¿Cómo pagó?</label>
             <select id="pay-method" class="form-select" required>
-              <option value="Transferencia Bancaria">Transferencia Bancaria (Bancolombia / Nequi)</option>
-              <option value="Efectivo">Dinero en Efectivo</option>
+              <option value="Transferencia Bancaria">Transferencia (Nequi / Bancolombia)</option>
+              <option value="Efectivo">Efectivo</option>
             </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Referencia / Observaciones</label>
-            <input type="text" id="pay-reference" class="form-control" placeholder="Ej: Comprobante #98213 o Pago en caja">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeModal('payment-modal')">Cancelar</button>
-            <button type="submit" class="btn btn-success">Registrar Pago Exitoso</button>
+            <button type="submit" class="btn btn-primary">Confirmar Pago</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- MODAL: NEW INSUMO -->
+    <!-- MODAL: NUEVO INSUMO -->
     <div class="modal-overlay" id="insumo-modal">
       <div class="modal-container">
         <div class="modal-header">
-          <h3><i class="ri-add-circle-line" style="color: var(--primary);"></i> Agregar Nuevo Insumo de Cocina</h3>
+          <h3>Nuevo Insumo</h3>
           <button class="modal-close" onclick="closeModal('insumo-modal')">&times;</button>
         </div>
         <form id="insumo-form">
           <div class="form-group">
-            <label class="form-label">Nombre del Insumo / Ingrediente</label>
-            <input type="text" id="ins-name" class="form-control" placeholder="Ej: Aceite Vegetal 5L" required>
+            <label class="form-label">Nombre del Insumo</label>
+            <input type="text" id="ins-name" class="form-control" required>
           </div>
           <div class="form-group">
             <label class="form-label">Categoría</label>
             <select id="ins-category" class="form-select" required>
-              <option value="Granos y Harinas">Granos & Harinas</option>
-              <option value="Proteínas">Carnes & Proteínas</option>
-              <option value="Bebidas">Bebidas & Extras</option>
-              <option value="Desechables">Empaques Obra</option>
-              <option value="Verduras y Frutas">Verduras & Frutas</option>
+              <option value="Granos y Harinas">Granos</option>
+              <option value="Proteínas">Carnes</option>
+              <option value="Bebidas">Bebidas</option>
+              <option value="Desechables">Empaques</option>
+              <option value="Verduras y Frutas">Verduras y Frutas</option>
             </select>
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label">Stock Inicial</label>
-              <input type="number" id="ins-stock" class="form-control" min="0" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Stock Mínimo (Alerta)</label>
-              <input type="number" id="ins-min" class="form-control" min="1" required>
-            </div>
+          <div class="form-group">
+            <label class="form-label">Cantidad Actual</label>
+            <input type="number" id="ins-stock" class="form-control" min="0" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Unidad de Medida</label>
-            <input type="text" id="ins-unit" class="form-control" placeholder="Ej: Kg, Litros, Unidades, Sacos" required>
+            <label class="form-label">Alerta de Cantidad Mínima</label>
+            <input type="number" id="ins-min" class="form-control" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Medida (Kilos, Litros, etc)</label>
+            <input type="text" id="ins-unit" class="form-control" required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeModal('insumo-modal')">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar Insumo</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- MODAL: NEW DISH -->
+    <!-- MODAL: NUEVO PLATO -->
     <div class="modal-overlay" id="dish-modal">
       <div class="modal-container">
         <div class="modal-header">
-          <h3><i class="ri-goblet-line" style="color: var(--primary);"></i> Crear Nuevo Plato de Menú</h3>
+          <h3>Crear Plato</h3>
           <button class="modal-close" onclick="closeModal('dish-modal')">&times;</button>
         </div>
         <form id="dish-form">
           <div class="form-group">
-            <label class="form-label">Nombre del Plato / Item</label>
-            <input type="text" id="dish-name" class="form-control" placeholder="Ej: Desayuno Paisa con Chocolate" required>
+            <label class="form-label">Nombre del Plato</label>
+            <input type="text" id="dish-name" class="form-control" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Tipo de Servicio</label>
+            <label class="form-label">Tipo de Comida</label>
             <select id="dish-type" class="form-select" required>
               <option value="desayuno">Desayuno</option>
               <option value="almuerzo">Almuerzo</option>
@@ -789,12 +556,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Precio ($ COP)</label>
-            <input type="number" id="dish-price" class="form-control" min="500" step="500" placeholder="14000" required>
+            <label class="form-label">Precio</label>
+            <input type="number" id="dish-price" class="form-control" min="500" step="500" required>
           </div>
           <div class="form-group">
             <label class="form-label">Descripción</label>
-            <textarea id="dish-desc" class="form-control" rows="3" placeholder="Ingredientes y contenido de la ración..."></textarea>
+            <textarea id="dish-desc" class="form-control" rows="3"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" onclick="closeModal('dish-modal')">Cancelar</button>
@@ -804,8 +571,11 @@
       </div>
     </div>
 
-    <!-- TOAST CONTAINER FOR NOTIFICATIONS -->
-    <div class="toast-container" id="toast-container"></div>
+    <!-- CAPA DE ÉXITO ESTILO WHATSAPP -->
+    <div class="success-overlay" id="success-overlay">
+      <div class="success-icon"><i class="ri-checkbox-circle-fill"></i></div>
+      <div class="success-text" id="success-text">¡Guardado con éxito!</div>
+    </div>
 
   </div>
 
